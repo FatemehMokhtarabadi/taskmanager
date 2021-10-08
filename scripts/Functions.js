@@ -1,5 +1,5 @@
 import appData from "./appData.js";
-import { renderCards, renderNewCard, filterByStatus } from "./Helpers.js";
+import { renderCards, renderNewCard } from "./Helpers.js";
 
 // D O M    E L E M E N T S 🍊
 
@@ -12,29 +12,80 @@ const tasksContainer = document.querySelector(".cards");
 const card = document.querySelector(".cards__card");
 // status buttons
 const todoStatus = document.querySelector(".todo");
-const inProgressStatus = document.querySelector("inProgress");
-const doneStatus = document.querySelector("done");
+const inProgressStatus = document.querySelector(".inProgress");
+const doneStatus = document.querySelector(".done");
 
-// F U N C T I O N S 🍊
+// E V E N T   L I S T E N E R S 🍊
+addBtn.addEventListener("click", addTaskHandler);
 
-function renderAll() {
-  appData.map((item) => {
-    renderCards(item);
+if (deleteBtn) {
+  deleteBtn.addEventListener("click", function () {
+    console.log("delete btn clicked");
   });
 }
 
-function filterTodos() {
-  const tasksTodo = filterByStatus(appData, "todo");
-  renderCards(tasksTodo);
-  console.log(tasksTodo);
+todoStatus.addEventListener("click", function () {
+  renderAll(false);
+  filterTodos();
+});
+
+inProgressStatus.addEventListener("click", filterInProgress);
+doneStatus.addEventListener("click", filterDone);
+
+// F U N C T I O N S 🍊
+
+function filterByStatus(givenStatus) {
+  return appData.filter((item) => {
+    item.taskStatus === givenStatus;
+  });
 }
 
-function filterInProgress() {
-  const tasksInProgress = filterByStatus(appData, "inProgress");
+function renderAll(command) {
+  if (command === "run") {
+    renderCards(appData);
+  } else if (command === "stop") {
+    return;
+  }
 }
 
-function filterDone() {
-  const tasksDone = filterByStatus(appData, "done");
+function filterTodos(command) {
+  if (command === "run") {
+    // const tasksTodo = filterByStatus("todo");
+    const tasksTodo = appData.filter((item) => {
+      return item.taskStatus === "todo";
+    });
+    renderCards(tasksTodo);
+    // window.renderAll = function () {};
+    console.log(tasksTodo);
+  } else if (command === "stop") {
+    return;
+  }
+}
+
+function filterInProgress(command) {
+  if (command === "run") {
+    // const tasksInProgress = filterByStatus("inProgress");
+    const tasksTodo = appData.filter((item) => {
+      return item.taskStatus === "inProgress";
+    });
+    renderCards(tasksTodo);
+    console.log(tasksTodo);
+  } else if (command === "stop") {
+    return;
+  }
+}
+
+function filterDone(command) {
+  if (command === "run") {
+    // const tasksDone = filterByStatus("done");
+    const tasksTodo = appData.filter((item) => {
+      return item.taskStatus === "done";
+    });
+    renderCards(tasksTodo);
+    console.log(tasksTodo);
+  } else if (command === "stop") {
+    return;
+  }
 }
 
 function addTaskHandler(event) {
