@@ -4,10 +4,11 @@ import {
   filterInProgress,
   filterDone,
   addTaskHandler,
+  deleteTaskHandler,
 } from "./scripts/Functions.js";
 import { renderCards } from "./scripts/Helpers.js";
 
-// renderAll("run");
+renderAll("run");
 // filterDone("run");
 // filterInProgress("run");
 // filterTodos("run");
@@ -32,7 +33,7 @@ addBtn.addEventListener("click", addTaskHandler);
 
 if (deleteBtn) {
   deleteBtn.addEventListener("click", function () {
-    console.log("delete btn clicked");
+    console.log("delete btn was clicked!");
   });
 }
 

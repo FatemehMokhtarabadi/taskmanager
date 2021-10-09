@@ -94,7 +94,7 @@ function addTaskHandler(event) {
 }
 
 function deleteTaskHandler(taskId) {
-  tasksContainer.removeChild(card.getAttribute("id") === taskId);
+  tasksContainer.removeChild(card.id === taskId);
 
   appData.filter((item) => {
     return item.id !== taskId;
