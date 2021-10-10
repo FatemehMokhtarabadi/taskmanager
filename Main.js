@@ -4,9 +4,13 @@ import {
   startTaskHandler,
   searchHandler,
   doneHandler,
-  statusClickStyles,
 } from "./scripts/Functions.js";
-import { renderByStatus, renderAll, showAll } from "./scripts/Helpers.js";
+import {
+  renderByStatus,
+  renderAll,
+  statusClickStyles,
+  showAll,
+} from "./scripts/Helpers.js";
 
 renderAll();
 
@@ -31,13 +35,6 @@ const doneStatus = document.querySelector(".done");
 // adding new task 🍕
 addBtn.addEventListener("click", addTaskHandler);
 
-// deleting a task 🍕
-
-deleteBtn.addEventListener("click", function (event) {
-  console.log(event.target);
-  console.log("delete btn clicked");
-});
-
 // filtering renders based on status `(todo/inProgress/done) 🍕
 
 allStatus.addEventListener("click", function (event) {
@@ -59,15 +56,16 @@ doneStatus.addEventListener("click", function (event) {
   statusClickStyles(event.target);
 });
 
-// changing task status 🍕
+// changing task status + deleting tasks, using event delegation 🍕
 
-startBtn.addEventListener("click", function (event) {
-  startTaskHandler(event.target);
+tasksContainer.addEventListener("click", function (event) {
+  const clickedCard = event.target;
+  startTaskHandler(clickedCard);
+  doneHandler(clickedCard);
+  deleteTaskHandler(clickedCard);
 });
 
-finishBtn.addEventListener("click", function (event) {
-  doneHandler(event.target);
-});
+// search between tasks 🍕
 
 searchInput.addEventListener("change", function (event) {
   searchHandler(event);
@@ -76,8 +74,6 @@ searchInput.addEventListener("change", function (event) {
 
 ANOTHER PART
 
-if "start" was clicked => cjange the task status from "todo" to "in progress"
-if "done" was clicked => change the task status from "in progress" to "done"
 if "delete" was clicked => delete the task from appData + remove it from the DOM
 
 */

@@ -1,11 +1,11 @@
 // A P P   D A T A 🍊
 
 const appData = [
-  // {
-  //   title: "working on task manager",
-  //   taskStatus: "todo",
-  //   id: 0,
-  // },
+  {
+    title: "working on task manager",
+    taskStatus: "todo",
+    id: 0,
+  },
   {
     title: "room cleaning",
     taskStatus: "todo",

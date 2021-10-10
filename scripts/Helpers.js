@@ -136,10 +136,19 @@ function renderByStatus(status) {
 
 function changeStatus(target, newStatus) {
   const parent = target.parentNode.parentNode;
-  console.log(target);
-  console.log(parent);
   parent.setAttribute("data-status", newStatus);
   parent.style.display = "none";
 }
 
-export { renderAll, renderByStatus, showAll, changeStatus, renderNewCard };
+function statusClickStyles(targ) {
+  targ.parentNode.style.backgroundColor = "#000";
+  targ.style.color = "#fff";
+}
+export {
+  renderAll,
+  renderByStatus,
+  showAll,
+  changeStatus,
+  renderNewCard,
+  statusClickStyles,
+};

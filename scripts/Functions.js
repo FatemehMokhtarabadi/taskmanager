@@ -14,32 +14,40 @@ function addTaskHandler(event) {
   renderNewCard();
 }
 
-function deleteTaskHandler(taskId) {
-  for (let i = 0; i < tasksContainer.children.length; i++) {
-    const childCard = tasksContainer.children[i];
-    if (childCard.getAttribute("id") === taskId) {
-      tasksContainer.removeChild(childCard);
+function startTaskHandler(target) {
+  const targetParent = target.parentNode.parentNode;
+  // if it contains this class, it means we clicked the start btn
+  if (target.classList.contains("start-btn")) {
+    if (targetParent.getAttribute("data-status") === "inProgress") {
+      console.log("inProgress was clicked");
+      return;
+    } else if (targetParent.getAttribute("data-status") === "todo") {
+      changeStatus(target, "inProgress");
     }
   }
-  appData.filter((item) => {
-    return item.id !== taskId;
-  });
-}
-
-function startTaskHandler(target) {
-  const targetParent = target.parentNode.parentNode.parentNode;
-  // targetParent.getAttribute("data-status") === "todo"
-  //   ? changeStatus(target, "inProgress")
-  //   : null;
-  console.log(targetParent.children[1]);
 }
 
 function doneHandler(target) {
   const targetParent = target.parentNode.parentNode;
-  targetParent.getAttribute("data-status") === "todo" ||
-  targetParent.getAttribute("data-status") === "inProgress"
-    ? changeStatus(target, "done")
-    : null;
+  if (target.classList.contains("finish-btn")) {
+    targetParent.getAttribute("data-status") === "todo" ||
+    targetParent.getAttribute("data-status") === "inProgress"
+      ? changeStatus(target, "done")
+      : null;
+  }
+}
+
+function deleteTaskHandler(target) {
+  const cards = target.parentNode.parentNode.parentNode.parentNode;
+  const theCardItself = target.parentNode.parentNode.parentNode;
+  // console.log(theCardItself);
+  // if it contains the class "cards__card", it's the parent we want to remove. if it doesn't, its another parent.
+  if (theCardItself.classList.contains("cards__card")) {
+    cards.removeChild(theCardItself);
+  }
+  // appData.filter((item) => {
+  //   return item.id !== theCardItself.getAttribute("id");
+  // });
 }
 
 function searchHandler(event) {
@@ -53,15 +61,10 @@ function searchHandler(event) {
   }
 }
 
-function statusClickStyles(targ) {
-  targ.parentNode.style.backgroundColor = "#000";
-  targ.style.color = "#fff";
-}
 export {
   addTaskHandler,
   deleteTaskHandler,
   startTaskHandler,
   searchHandler,
   doneHandler,
-  statusClickStyles,
 };
