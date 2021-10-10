@@ -50,14 +50,29 @@ function deleteTaskHandler(target) {
   // });
 }
 
-function searchHandler(event) {
-  event.preventDefault();
-  const tasks = tasksContainer.children;
-  const searchedTerm = event.target.value;
-  for (let i = 0; i < tasks.length; i++) {
-    const task = tasks[i];
-    const title = task.childNodes[0].innerText;
-    console.log(title);
+// function searchHandler(event) {
+//   event.preventDefault();
+//   const tasks = tasksContainer.children;
+//   const searchedTerm = event.target.value;
+//   for (let i = 0; i < tasks.length; i++) {
+//     const task = tasks[i];
+//     const title = task.childNodes[0].innerText;
+//     console.log(title);
+//   }
+// }
+
+function searchHandler() {
+  let input = document.getElementById("search");
+  let filter = input.value;
+  // .toLowerCase();
+  let parentNodes = document.getElementsByClassName("cards__card");
+  console.log(parentNodes);
+  for (let i = 0; i < parentNodes.length; i++) {
+    if (parentNodes[i].innerText.toLowerCase().includes(filter)) {
+      parentNodes[i].style.display = "flex";
+    } else {
+      parentNodes[i].style.display = "none";
+    }
   }
 }
 

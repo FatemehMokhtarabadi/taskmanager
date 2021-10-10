@@ -17,7 +17,7 @@ renderAll();
 // D O M    E L E M E N T S 🍊
 
 const addBtn = document.querySelector(".form__btn");
-const searchInput = document.querySelector("#search");
+const searchInput = document.getElementById("search");
 const startBtn = document.querySelector(".start-btn");
 const finishBtn = document.querySelector(".finish-btn");
 const deleteBtn = document.querySelector(".delete");
@@ -67,9 +67,7 @@ tasksContainer.addEventListener("click", function (event) {
 
 // search between tasks 🍕
 
-searchInput.addEventListener("change", function (event) {
-  searchHandler(event);
-});
+searchInput.addEventListener("keyup", searchHandler);
 /*
 
 ANOTHER PART
