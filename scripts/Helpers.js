@@ -1,6 +1,8 @@
 import appData from "./appData.js";
-const inputValue = document.querySelector(".form__input");
+
+const inputValue = document.querySelector("#task");
 const tasksContainer = document.querySelector(".cards");
+const card = document.querySelector(".cards__card");
 
 // from form input
 function renderNewCard() {
@@ -12,7 +14,6 @@ function renderNewCard() {
   const cardFinishButton = document.createElement("button");
   const cardEditButton = document.createElement("button");
   const cardDeleteButton = document.createElement("button");
-  const editIcon = document.createElement("img");
   const deleteIcon = document.createElement("img");
 
   // appending childs to parents
@@ -22,34 +23,30 @@ function renderNewCard() {
   cardButtonsDiv.appendChild(cardFinishButton);
   cardButtonsDiv.appendChild(cardEditButton);
   cardButtonsDiv.appendChild(cardDeleteButton);
-  cardEditButton.appendChild(editIcon);
   cardDeleteButton.appendChild(deleteIcon);
 
-  // adding class names
+  // adding class names and attrs
   cardContainer.classList.add("cards__card");
   cardContainer.setAttribute("id", appData.length);
+  cardContainer.setAttribute("data-status", "todo");
   cardTitle.classList.add("cards__title");
   cardButtonsDiv.classList.add("cards__buttons");
   cardStartButton.classList.add("cards__btn");
   cardStartButton.classList.add("start-btn");
   cardFinishButton.classList.add("cards__btn");
   cardFinishButton.classList.add("finish-btn");
-  cardEditButton.classList.add("cards__btn");
-  cardEditButton.classList.add("edit");
-  cardEditButton.classList.add("icon-btn");
   cardDeleteButton.classList.add("cards__btn");
   cardDeleteButton.classList.add("delete");
   cardDeleteButton.classList.add("icon-btn");
-  editIcon.classList.add("cards__icon");
   deleteIcon.classList.add("cards__icon");
 
   // adding values
-  cardTitle.innerText = inputValue.value;
+  cardTitle.innerText = `${inputValue.value}🌼${cardContainer.getAttribute(
+    "data-status"
+  )} `;
   cardStartButton.innerText = "start";
   cardFinishButton.innerText = "done";
-  editIcon.src = "./assets/edit.svg";
   deleteIcon.src = "./assets/trash.svg";
-  editIcon.alt = "edit";
   deleteIcon.alt = "delete";
 
   //adding the card to parent
@@ -61,24 +58,22 @@ function renderNewCard() {
     title: inputValue.value,
   };
   appData.push(newEl);
-  console.log(newEl);
-  console.log(appData);
   inputValue.value = "";
 }
 
 // from appData itself 🍊
 
-function renderCards(givenArray) {
-  givenArray.map((item) => {
+function renderAll() {
+  appData.map((item) => {
     //creating elements
     const cardContainer = document.createElement("div");
     const cardTitle = document.createElement("p");
     const cardButtonsDiv = document.createElement("div");
     const cardStartButton = document.createElement("button");
     const cardFinishButton = document.createElement("button");
-    const cardEditButton = document.createElement("button");
+    // const cardEditButton = document.createElement("button");
     const cardDeleteButton = document.createElement("button");
-    const editIcon = document.createElement("img");
+    // const editIcon = document.createElement("img");
     const deleteIcon = document.createElement("img");
 
     // appending childs to parents
@@ -86,48 +81,65 @@ function renderCards(givenArray) {
     cardContainer.appendChild(cardButtonsDiv);
     cardButtonsDiv.appendChild(cardStartButton);
     cardButtonsDiv.appendChild(cardFinishButton);
-    cardButtonsDiv.appendChild(cardEditButton);
+    // cardButtonsDiv.appendChild(cardEditButton);
     cardButtonsDiv.appendChild(cardDeleteButton);
-    cardEditButton.appendChild(editIcon);
+    // cardEditButton.appendChild(editIcon);
     cardDeleteButton.appendChild(deleteIcon);
 
-    // adding class names
+    // adding class names and attrs
     cardContainer.classList.add("cards__card");
+    cardContainer.setAttribute("data-status", item.taskStatus);
     cardTitle.classList.add("cards__title");
     cardButtonsDiv.classList.add("cards__buttons");
     cardStartButton.classList.add("cards__btn");
     cardStartButton.classList.add("start-btn");
     cardFinishButton.classList.add("cards__btn");
     cardFinishButton.classList.add("finish-btn");
-    cardEditButton.classList.add("cards__btn");
-    cardEditButton.classList.add("edit");
-    cardEditButton.classList.add("icon-btn");
+    // cardEditButton.classList.add("cards__btn");
+    // cardEditButton.classList.add("edit");
+    // cardEditButton.classList.add("icon-btn");
     cardDeleteButton.classList.add("cards__btn");
     cardDeleteButton.classList.add("delete");
     cardDeleteButton.classList.add("icon-btn");
-    editIcon.classList.add("cards__icon");
+    // editIcon.classList.add("cards__icon");
     deleteIcon.classList.add("cards__icon");
 
     // adding values
-    cardTitle.innerText = ` 🌼${item.taskStatus}`;
+    cardTitle.innerText = `${item.title}🌼${item.taskStatus}`;
     cardStartButton.innerText = "start";
     cardFinishButton.innerText = "done";
-    editIcon.src = "./assets/edit.svg";
+    // editIcon.src = "./assets/edit.svg";
     deleteIcon.src = "./assets/trash.svg";
-    editIcon.alt = "edit";
+    // editIcon.alt = "edit";
     deleteIcon.alt = "delete";
 
     //adding the card to parent
     tasksContainer.appendChild(cardContainer);
   });
 }
-
-// filtering tasks with status
-
-function filterByStatus(givenStatus) {
-  appData.filter((item) => {
-    return item.taskStatus === givenStatus;
-  });
+function showAll() {
+  for (let i = 0; i < tasksContainer.children.length; i++) {
+    const childCard = tasksContainer.children[i];
+    childCard.style.display = "flex";
+  }
 }
 
-export { renderCards, renderNewCard };
+function renderByStatus(status) {
+  showAll();
+  for (let i = 0; i < tasksContainer.children.length; i++) {
+    const childCard = tasksContainer.children[i];
+    if (childCard.getAttribute("data-status") !== status) {
+      childCard.style.display = "none";
+    }
+  }
+}
+
+function changeStatus(target, newStatus) {
+  const parent = target.parentNode.parentNode;
+  console.log(target);
+  console.log(parent);
+  parent.setAttribute("data-status", newStatus);
+  parent.style.display = "none";
+}
+
+export { renderAll, renderByStatus, showAll, changeStatus, renderNewCard };

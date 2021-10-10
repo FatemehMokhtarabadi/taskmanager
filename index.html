@@ -15,15 +15,21 @@
           <p class="date__day">Tuesday</p>
           <p class="date__date">Sep 21</p>
           <p class="date__year">2021</p>
-          <!--         
-          <div>
-            <p class="date__motiv">
-              Opportunities don't happen. You create them.
-              <span class="date__motiv-name"> - Chris Grosser </span>
-            </p>
-          </div> -->
         </section>
         <section class="main">
+          <form class="form">
+            <label for="search" class="form__label form__searchLabel">
+              <input
+                type=" text"
+                id="search"
+                name="search"
+                placeholder="search..."
+                class="form__input form__searchInput"
+            /></label>
+            <button type="submit" class="form__search" id="addBtn">
+              Search
+            </button>
+          </form>
           <form class="form">
             <label for="task" class="form__label">
               <input
@@ -43,42 +49,17 @@
                   <a class="nav__link all" href="#">All</a>
                 </li>
                 <li class="nav__item todo">
-                  <a class="nav__link" href="#todos"> To do</a>
+                  <a class="nav__link" href="#"> To do</a>
                 </li>
                 <li class="nav__item inProgress">
-                  <a class="nav__link" href="#in-progress">In progress</a>
+                  <a class="nav__link" href="#">In progress</a>
                 </li>
                 <li class="nav__item done">
-                  <a class="nav__link" href="#done"> Done</a>
+                  <a class="nav__link" href="#"> Done</a>
                 </li>
               </ul>
             </nav>
-            <div class="cards">
-              <!-- <div class="cards__msg">
-                <p>No tasks yet.</p>
-              </div> -->
-              <!-- <div class="cards__card">
-                <p class="cards__title">piano piano</p>
-                <div class="cards__buttons">
-                  <button class="cards__btn start-btn">start</button>
-                  <button class="cards__btn finish-btn">done</button>
-                  <button class="cards__btn edit icon-btn">
-                    <img
-                      class="cards__icon"
-                      src="./assets/edit.svg"
-                      alt="edit"
-                    />
-                  </button>
-                  <button class="cards__btn delete icon-btn">
-                    <img
-                      class="cards__icon"
-                      src="./assets/trash.svg"
-                      alt="delete"
-                    />
-                  </button>
-                </div>
-              </div> -->
-            </div>
+            <div class="cards"></div>
           </div>
         </section>
       </main>

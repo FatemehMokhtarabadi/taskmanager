@@ -1,92 +1,13 @@
 import appData from "./appData.js";
-import { renderCards, renderNewCard } from "./Helpers.js";
+import { renderNewCard, changeStatus } from "./Helpers.js";
 
 // D O M    E L E M E N T S 🍊
 
-const addBtn = document.querySelector(".form__btn");
-const startBtn = document.querySelector(".start-btn");
-const finishBtn = document.querySelector(".finish-btn");
-const deleteBtn = document.querySelector(".delete");
-const inputValue = document.querySelector(".form__input");
 const tasksContainer = document.querySelector(".cards");
 const card = document.querySelector(".cards__card");
-// status buttons
-const todoStatus = document.querySelector(".todo");
-const inProgressStatus = document.querySelector(".inProgress");
-const doneStatus = document.querySelector(".done");
-
-// E V E N T   L I S T E N E R S 🍊
-addBtn.addEventListener("click", addTaskHandler);
-
-if (deleteBtn) {
-  deleteBtn.addEventListener("click", function () {
-    console.log("delete btn clicked");
-  });
-}
-
-todoStatus.addEventListener("click", function () {
-  renderAll(false);
-  filterTodos();
-});
-
-inProgressStatus.addEventListener("click", filterInProgress);
-doneStatus.addEventListener("click", filterDone);
+const searchInput = document.querySelector("#search");
 
 // F U N C T I O N S 🍊
-
-function filterByStatus(givenStatus) {
-  return appData.filter((item) => {
-    item.taskStatus === givenStatus;
-  });
-}
-
-function renderAll(command) {
-  if (command === "run") {
-    renderCards(appData);
-  } else if (command === "stop") {
-    return;
-  }
-}
-
-function filterTodos(command) {
-  if (command === "run") {
-    // const tasksTodo = filterByStatus("todo");
-    const tasksTodo = appData.filter((item) => {
-      return item.taskStatus === "todo";
-    });
-    renderCards(tasksTodo);
-    // window.renderAll = function () {};
-    console.log(tasksTodo);
-  } else if (command === "stop") {
-    return;
-  }
-}
-
-function filterInProgress(command) {
-  if (command === "run") {
-    // const tasksInProgress = filterByStatus("inProgress");
-    const tasksTodo = appData.filter((item) => {
-      return item.taskStatus === "inProgress";
-    });
-    renderCards(tasksTodo);
-    console.log(tasksTodo);
-  } else if (command === "stop") {
-    return;
-  }
-}
-
-function filterDone(command) {
-  if (command === "run") {
-    // const tasksDone = filterByStatus("done");
-    const tasksTodo = appData.filter((item) => {
-      return item.taskStatus === "done";
-    });
-    renderCards(tasksTodo);
-    console.log(tasksTodo);
-  } else if (command === "stop") {
-    return;
-  }
-}
 
 function addTaskHandler(event) {
   event.preventDefault();
@@ -94,29 +15,53 @@ function addTaskHandler(event) {
 }
 
 function deleteTaskHandler(taskId) {
-  tasksContainer.removeChild(card.id === taskId);
-
+  for (let i = 0; i < tasksContainer.children.length; i++) {
+    const childCard = tasksContainer.children[i];
+    if (childCard.getAttribute("id") === taskId) {
+      tasksContainer.removeChild(childCard);
+    }
+  }
   appData.filter((item) => {
     return item.id !== taskId;
   });
 }
 
-function startTaskHandler(taskId) {
-  appData.filter((item) => {
-    const startedTask = item.id === taskId;
-    startedTask.taskStatus = "inProgress";
-  });
+function startTaskHandler(target) {
+  const targetParent = target.parentNode.parentNode.parentNode;
+  // targetParent.getAttribute("data-status") === "todo"
+  //   ? changeStatus(target, "inProgress")
+  //   : null;
+  console.log(targetParent.children[1]);
 }
 
-function searchTaskListHandler() {
-  console.log(" filter list of tasks handler");
+function doneHandler(target) {
+  const targetParent = target.parentNode.parentNode;
+  targetParent.getAttribute("data-status") === "todo" ||
+  targetParent.getAttribute("data-status") === "inProgress"
+    ? changeStatus(target, "done")
+    : null;
 }
 
+function searchHandler(event) {
+  event.preventDefault();
+  const tasks = tasksContainer.children;
+  const searchedTerm = event.target.value;
+  for (let i = 0; i < tasks.length; i++) {
+    const task = tasks[i];
+    const title = task.childNodes[0].innerText;
+    console.log(title);
+  }
+}
+
+function statusClickStyles(targ) {
+  targ.parentNode.style.backgroundColor = "#000";
+  targ.style.color = "#fff";
+}
 export {
   addTaskHandler,
   deleteTaskHandler,
-  renderAll,
-  filterTodos,
-  filterInProgress,
-  filterDone,
+  startTaskHandler,
+  searchHandler,
+  doneHandler,
+  statusClickStyles,
 };
