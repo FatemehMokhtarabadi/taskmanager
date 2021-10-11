@@ -71,9 +71,7 @@ function renderAll() {
     const cardButtonsDiv = document.createElement("div");
     const cardStartButton = document.createElement("button");
     const cardFinishButton = document.createElement("button");
-    // const cardEditButton = document.createElement("button");
     const cardDeleteButton = document.createElement("button");
-    // const editIcon = document.createElement("img");
     const deleteIcon = document.createElement("img");
 
     // appending childs to parents
@@ -81,9 +79,7 @@ function renderAll() {
     cardContainer.appendChild(cardButtonsDiv);
     cardButtonsDiv.appendChild(cardStartButton);
     cardButtonsDiv.appendChild(cardFinishButton);
-    // cardButtonsDiv.appendChild(cardEditButton);
     cardButtonsDiv.appendChild(cardDeleteButton);
-    // cardEditButton.appendChild(editIcon);
     cardDeleteButton.appendChild(deleteIcon);
 
     // adding class names and attrs
@@ -95,22 +91,16 @@ function renderAll() {
     cardStartButton.classList.add("start-btn");
     cardFinishButton.classList.add("cards__btn");
     cardFinishButton.classList.add("finish-btn");
-    // cardEditButton.classList.add("cards__btn");
-    // cardEditButton.classList.add("edit");
-    // cardEditButton.classList.add("icon-btn");
     cardDeleteButton.classList.add("cards__btn");
     cardDeleteButton.classList.add("delete");
     cardDeleteButton.classList.add("icon-btn");
-    // editIcon.classList.add("cards__icon");
     deleteIcon.classList.add("cards__icon");
 
     // adding values
     cardTitle.innerText = `${item.title}🌼${item.taskStatus}`;
     cardStartButton.innerText = "start";
     cardFinishButton.innerText = "done";
-    // editIcon.src = "./assets/edit.svg";
     deleteIcon.src = "./assets/trash.svg";
-    // editIcon.alt = "edit";
     deleteIcon.alt = "delete";
 
     //adding the card to parent

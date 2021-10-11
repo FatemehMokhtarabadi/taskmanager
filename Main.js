@@ -13,12 +13,7 @@ renderAll();
 
 const addBtn = document.querySelector(".form__btn");
 const searchInput = document.getElementById("search");
-const startBtn = document.querySelector(".start-btn");
-const finishBtn = document.querySelector(".finish-btn");
-const deleteBtn = document.querySelector(".delete");
-const inputValue = document.querySelector("#task");
 const tasksContainer = document.querySelector(".cards");
-const card = document.querySelector(".cards__card");
 // status buttons
 const allStatus = document.querySelector(".all");
 const todoStatus = document.querySelector(".todo");
@@ -59,10 +54,3 @@ tasksContainer.addEventListener("click", function (event) {
 // search between tasks 🍕
 
 searchInput.addEventListener("keyup", searchHandler);
-/*
-
-ANOTHER PART
-
-if "delete" was clicked => delete the task from appData + remove it from the DOM
-
-*/

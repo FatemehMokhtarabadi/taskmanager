@@ -1,11 +1,4 @@
-import appData from "./appData.js";
 import { renderNewCard, changeStatus } from "./Helpers.js";
-
-// D O M    E L E M E N T S 🍊
-
-const tasksContainer = document.querySelector(".cards");
-const card = document.querySelector(".cards__card");
-const searchInput = document.querySelector("#search");
 
 // F U N C T I O N S 🍊
 
@@ -40,7 +33,6 @@ function doneHandler(target) {
 function deleteTaskHandler(target) {
   const cards = target.parentNode.parentNode.parentNode.parentNode;
   const theCardItself = target.parentNode.parentNode.parentNode;
-  // console.log(theCardItself);
   // if it contains the class "cards__card", it's the parent we want to remove. if it doesn't, its another parent.
   if (theCardItself.classList.contains("cards__card")) {
     cards.removeChild(theCardItself);
@@ -50,21 +42,9 @@ function deleteTaskHandler(target) {
   // });
 }
 
-// function searchHandler(event) {
-//   event.preventDefault();
-//   const tasks = tasksContainer.children;
-//   const searchedTerm = event.target.value;
-//   for (let i = 0; i < tasks.length; i++) {
-//     const task = tasks[i];
-//     const title = task.childNodes[0].innerText;
-//     console.log(title);
-//   }
-// }
-
 function searchHandler() {
   let input = document.getElementById("search");
   let filter = input.value;
-  // .toLowerCase();
   let parentNodes = document.getElementsByClassName("cards__card");
   console.log(parentNodes);
   for (let i = 0; i < parentNodes.length; i++) {
