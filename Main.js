@@ -5,12 +5,7 @@ import {
   searchHandler,
   doneHandler,
 } from "./scripts/Functions.js";
-import {
-  renderByStatus,
-  renderAll,
-  statusClickStyles,
-  showAll,
-} from "./scripts/Helpers.js";
+import { renderByStatus, renderAll, showAll } from "./scripts/Helpers.js";
 
 renderAll();
 
@@ -39,21 +34,17 @@ addBtn.addEventListener("click", addTaskHandler);
 
 allStatus.addEventListener("click", function (event) {
   showAll();
-  statusClickStyles(event.target);
 });
 
 todoStatus.addEventListener("click", function (event) {
   renderByStatus("todo");
-  statusClickStyles(event.target);
 });
 
 inProgressStatus.addEventListener("click", function (event) {
   renderByStatus("inProgress");
-  statusClickStyles(event.target);
 });
 doneStatus.addEventListener("click", function (event) {
   renderByStatus("done");
-  statusClickStyles(event.target);
 });
 
 // changing task status + deleting tasks, using event delegation 🍕

@@ -140,15 +140,8 @@ function changeStatus(target, newStatus) {
   parent.style.display = "none";
 }
 
-function statusClickStyles(targ) {
-  targ.parentNode.style.backgroundColor = "#000";
-  targ.style.color = "#fff";
-}
-export {
-  renderAll,
-  renderByStatus,
-  showAll,
-  changeStatus,
-  renderNewCard,
-  statusClickStyles,
-};
+// function statusClickStyles(targ) {
+//   targ.parentNode.style.backgroundColor = "#000";
+//   targ.style.color = "#fff";
+// }
+export { renderAll, renderByStatus, showAll, changeStatus, renderNewCard };
